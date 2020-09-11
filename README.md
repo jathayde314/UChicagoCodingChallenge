@@ -16,3 +16,5 @@ Bounds: 0 <= len(arr) ; 0 <= cost ; 0 <= impact
 ### Solution
 
 To solve the problem, it at first appears that a recursive solution would be the most natural. For each option *Op* and given cost *C*, one would return the *max*(*max arr* from 0 to *Op* given *C*, *max arr* from 0 to *Op* given *C - cost(Op)* plus *impact(Op)*). The main issue with this algorithm is that it checks both the inclusion and exclusion of an option for every path. Therefore, it checks every possible combination resulting in a time complexity of *O(2^len(arr))*
+
+Using memoization, we can prevent double checking certain states. We use the same logic as above, but instead of recursively checking every possible option, we check the previously stored maximal states in a double array where each row represents an option and each column represents a cost. The zeroth row is set to zero because the impact of no options is zero. Since each cell requires a constant calculation, there is a time complexity of *O(len(arr)\*(D + 1))*  and a space complexity of *O((len(arr) + 1)\*(D + 1))*. Asymptotically, this approaches *O(len(arr)\* D)* for both time and space complexity.
